@@ -23,7 +23,7 @@ const barraNavegacion = () => {
 
       <!-- Botón hamburguesa para móviles -->
       <button
-        class="navbar-toggler"
+        class="navbar-toggler hamburger-custom"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarNav"
@@ -31,11 +31,11 @@ const barraNavegacion = () => {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon hamburger-icon"></span>
       </button>
 
       <!-- Enlaces -->
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <div class="collapse navbar-collapse justify-content-center navbar-collapse-custom" id="navbarNav">
         <div class="navbar-nav">
           <a class="nav-link active" href="#">Inicio</a>
 
@@ -70,15 +70,26 @@ barraNavegacion();
 window.addEventListener("scroll", () => {
   const navbar = document.querySelector(".navbar");
   const logo = document.getElementById("logo-vw");
+  const hamburgerIcon = document.querySelector(".hamburger-icon");
 
   if (window.scrollY > 50) {
     navbar.classList.add("navbar-scrolled");
     navbar.classList.remove("navbar-transparent");
     logo.src = "./IMG/LOGO.png"; // Logo oscuro
+
+    // Cambiar hamburguesa a color gris (original)
+    if (hamburgerIcon) {
+      hamburgerIcon.classList.add("hamburger-scrolled");
+    }
   } else {
     navbar.classList.add("navbar-transparent");
     navbar.classList.remove("navbar-scrolled");
     logo.src = "./IMG/LOGO-white.png"; // Logo claro
+
+    // Cambiar hamburguesa a color blanco
+    if (hamburgerIcon) {
+      hamburgerIcon.classList.remove("hamburger-scrolled");
+    }
   }
 });
 
@@ -316,4 +327,227 @@ document.addEventListener("DOMContentLoaded", () => {
       form.reset();
     });
   }
+});
+
+/* ========================================================================= */
+/*  ESTILOS PERSONALIZADOS PARA NAVBAR Y HAMBURGUESA                        */
+/* ========================================================================= */
+const estilosNavbar = document.createElement("style");
+estilosNavbar.textContent = `
+  /* Estilos para el botón hamburguesa personalizado */
+  .hamburger-custom {
+    border: none !important;
+    background: none !important;
+    padding: 4px 8px;
+    margin: 0;
+  }
+  
+  .hamburger-custom:focus {
+    box-shadow: none !important;
+  }
+  
+  /* Ícono hamburguesa personalizado */
+  .hamburger-icon {
+    background-image: none !important;
+    width: 24px;
+    height: 18px;
+    position: relative;
+    transform: none !important;
+  }
+  
+  .hamburger-icon::before,
+  .hamburger-icon::after,
+  .hamburger-icon {
+    display: block;
+    background-color: white;
+    height: 2px;
+    width: 24px;
+    transition: all 0.3s ease;
+  }
+  
+  .hamburger-icon::before,
+  .hamburger-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  
+  .hamburger-icon::before {
+    top: -6px;
+  }
+  
+  .hamburger-icon::after {
+    bottom: -6px;
+  }
+  
+  /* Estado cuando se hace scroll - hamburguesa gris */
+  .hamburger-scrolled,
+  .hamburger-scrolled::before,
+  .hamburger-scrolled::after {
+    background-color: rgba(0, 0, 0, 0.55) !important;
+  }
+  
+  /* Menú desplegable móvil del lado derecho */
+  .navbar-collapse-custom {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto !important;
+    width: 280px;
+    background: white;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: none;
+    z-index: 1000;
+    padding: 1rem;
+    margin-top: 1px;
+  }
+  
+  /* Flecha del menú desplegable */
+  .navbar-collapse-custom::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid white;
+    z-index: 1001;
+  }
+  
+  /* Estilos para los enlaces del menú móvil */
+  @media (max-width: 991.98px) {
+    .navbar-nav {
+      padding: 0;
+    }
+    
+    .navbar-nav .nav-link {
+      color: #333 !important;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+      font-weight: 500;
+    }
+    
+    .navbar-nav .nav-link:hover {
+      color: #0d6efd !important;
+      background-color: #f8f9fa;
+      border-radius: 0.5rem;
+      margin: 0 -0.5rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    
+    .navbar-nav .nav-link.active {
+      color: #0d6efd !important;
+      font-weight: 600;
+    }
+    
+    /* Dropdown en móvil */
+    .dropdown-menu {
+      position: static !important;
+      float: none !important;
+      width: 100% !important;
+      margin-top: 0;
+      background-color: #f8f9fa;
+      border: none;
+      border-radius: 0.5rem;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dropdown-item {
+      color: #666 !important;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .dropdown-item:hover {
+      background-color: #e9ecef;
+      color: #0d6efd !important;
+    }
+  }
+  
+  /* Animación para el menú desplegable */
+  .navbar-collapse {
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-collapse.show {
+    animation: slideDownFade 0.3s ease-out;
+  }
+  
+  @keyframes slideDownFade {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsivo para pantallas muy pequeñas */
+  @media (max-width: 480px) {
+    .navbar-collapse-custom {
+      width: calc(100vw - 40px);
+      right: 20px;
+    }
+    
+    .navbar-collapse-custom::before {
+      right: 40px;
+    }
+  }
+  
+  /* Asegurar que el navbar tenga position relative para el dropdown */
+  .navbar {
+    position: relative;
+  }
+  
+  /* Cerrar automáticamente el menú al hacer clic en un enlace */
+  @media (max-width: 991.98px) {
+    .nav-link:not(.dropdown-toggle) {
+      cursor: pointer;
+    }
+  }
+`;
+
+document.head.appendChild(estilosNavbar);
+
+/* ========================================================================= */
+/*  FUNCIONALIDAD ADICIONAL PARA CERRAR MENÚ EN MÓVIL                       */
+/* ========================================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  // Cerrar menú móvil al hacer clic en un enlace (excepto dropdown)
+  document
+    .querySelectorAll(".nav-link:not(.dropdown-toggle)")
+    .forEach((link) => {
+      link.addEventListener("click", () => {
+        const navbarCollapse = document.getElementById("navbarNav");
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+          toggle: false,
+        });
+        bsCollapse.hide();
+      });
+    });
+
+  // Cerrar menú móvil al hacer clic fuera de él
+  document.addEventListener("click", (e) => {
+    const navbar = document.querySelector(".navbar");
+    const navbarToggler = document.querySelector(".navbar-toggler");
+    const navbarCollapse = document.getElementById("navbarNav");
+
+    if (
+      !navbar.contains(e.target) &&
+      navbarCollapse.classList.contains("show")
+    ) {
+      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false,
+      });
+      bsCollapse.hide();
+    }
+  });
 });
