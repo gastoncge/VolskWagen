@@ -47,6 +47,7 @@
 //TRABAJO N4
 const vehiculos = [
   {
+    ID: 1,
     Marca: "Volskwagen",
     Tipo: "Pick-Up",
     Modelo: "Amarok",
@@ -58,6 +59,7 @@ const vehiculos = [
   },
 
   {
+    ID: 2,
     Marca: "Volskwagen",
     Tipo: "Pick-Up",
     Modelo: "Saveiro",
@@ -69,6 +71,7 @@ const vehiculos = [
   },
 
   {
+    ID: 3,
     Marca: "Volskwagen",
     Tipo: "SUV",
     Modelo: "Tiguan",
@@ -80,6 +83,7 @@ const vehiculos = [
   },
 
   {
+    ID: 4,
     Marca: "Volskwagen",
     Tipo: "SUV",
     Modelo: "Taos",
@@ -91,6 +95,7 @@ const vehiculos = [
   },
 
   {
+    ID: 5,
     Marca: "Volskwagen",
     Tipo: "SUV",
     Modelo: "T-Cross",
@@ -102,6 +107,7 @@ const vehiculos = [
   },
 
   {
+    ID: 6,
     Marca: "Volskwagen",
     Tipo: "SUV",
     Modelo: "Nivus",
@@ -113,6 +119,7 @@ const vehiculos = [
   },
 
   {
+    ID: 7,
     Marca: "Volskwagen",
     Tipo: "Sedan",
     Modelo: "Vento",
@@ -124,6 +131,7 @@ const vehiculos = [
   },
 
   {
+    ID: 8,
     Marca: "Volskwagen",
     Tipo: "Sedan",
     Modelo: "Virtus",
@@ -135,6 +143,7 @@ const vehiculos = [
   },
 
   {
+    ID: 9,
     Marca: "Volskwagen",
     Tipo: "Hatchback",
     Modelo: "Golf",
@@ -146,6 +155,7 @@ const vehiculos = [
   },
 
   {
+    ID: 10,
     Marca: "Volskwagen",
     Tipo: "Hatchback",
     Modelo: "Polo",

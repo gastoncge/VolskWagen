@@ -2,12 +2,6 @@
 /*  ESTILOS GENERALES                                                         */
 /* ========================================================================== */
 
-/* Ícono del carrito: anima su tamaño en el hover --------------------------- */
-.carrito:hover {
-  transition: all 0.5s; /* ⬅ corregido “0, 5s” → “0.5s” :contentReference[oaicite:0]{index=0} */
-  transform: scale(1.1);
-}
-
 /* Carrusel “héroe” --------------------------------------------------------- */
 .carousel,
 .carousel-inner,
@@ -93,4 +87,47 @@
 }
 .c3 {
   margin-top: 100px;
+}
+
+/* Estilo personalizado para el menú desplegable */
+/* Hover dropdown para pantallas grandes */
+@media (min-width: 992px) {
+  .navbar .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Mejora visual del dropdown */
+.dropdown-menu {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  border-radius: 1rem;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.dropdown-item {
+  padding: 0.7rem 1.5rem;
+  color: #0d0d0d;
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+  border-radius: 0.5rem;
+}
+
+.dropdown-item:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+@media (min-width: 992px) {
+  .navbar .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* Esto es importante para que no haya espacio */
+  }
+}
+
+.dropdown-menu .bi {
+  color: #0d0d0d !important;
 }
