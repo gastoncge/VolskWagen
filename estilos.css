@@ -2,31 +2,43 @@
 /*  ESTILOS GENERALES                                                         */
 /* ========================================================================== */
 
-/* Carrusel “héroe” --------------------------------------------------------- */
+/* Variables CSS para consistencia */
+:root {
+  --primary-color: #0d6efd;
+  --dark-color: #002244;
+  --text-dark: #0d0d0d;
+  --border-color: rgba(0, 0, 0, 0.15);
+  --shadow-light: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.15);
+  --transition-smooth: all 0.3s ease;
+  --bg-overlay: rgba(0, 0, 0, 0.2);
+}
+
+/* Carrusel "héroe" --------------------------------------------------------- */
 .carousel,
 .carousel-inner,
 .carousel-item {
-  height: 100vh; /* 100% de la altura de la ventana */
+  height: 100vh;
 }
 
 .carousel-item img {
   height: 100%;
-  object-fit: cover; /* Imagen ocupa todo sin deformarse */
+  object-fit: cover;
 }
 
 .overlay {
-  /* Capa oscura encima de cada slide */
   position: absolute;
-  inset: 0; /* top/right/bottom/left: 0 */
-  background: rgba(0, 0, 0, 0.2);
+  inset: 0;
+  background: var(--bg-overlay);
   z-index: 1;
-  pointer-events: none; /* No bloquea clics */
+  pointer-events: none;
 }
 
 /* Texto dentro del carrusel ------------------------------------------------ */
 .carousel-caption {
-  z-index: 2; /* Sobre la overlay */
+  z-index: 2;
 }
+
 .carousel-caption.bottom-right {
   right: 5%;
   bottom: 10%;
@@ -34,28 +46,40 @@
   text-align: right;
 }
 
-/* Bloque “Bienvenido a Volkswagen” ---------------------------------------- */
+/* Bloque "Bienvenido a Volkswagen" ---------------------------------------- */
 .palabras {
   text-align: center;
   padding: 40px 20px;
 }
+
 .palabras h1 {
   font-size: 2.5rem;
-  color: #002244;
+  color: var(--dark-color);
 }
+
 .palabras p {
   font-size: 1.3rem;
   color: #001133;
 }
 
-/* Navegación: transparente al inicio, solida al hacer scroll --------------- */
+/* ========================================================================= */
+/*  NAVEGACIÓN                                                               */
+/* ========================================================================= */
+
+.navbar {
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
 .navbar-custom {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Estados del navbar */
 .navbar-transparent {
   background: transparent !important;
-  color: #fff;
 }
+
 .navbar-transparent .nav-link,
 .navbar-transparent .navbar-brand,
 .navbar-transparent .bi {
@@ -63,71 +87,296 @@
 }
 
 .navbar-scrolled {
-  /* ⬅ se aplica vía JS al hacer scroll */
   background: #fff !important;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 .navbar-scrolled .nav-link,
 .navbar-scrolled .navbar-brand,
 .navbar-scrolled .bi {
   color: #000 !important;
 }
 
-/* FORMULARIO DE CONTACTO – fondo más alto y cómodo */
-#formulario-contacto {
-  min-height: 60vh; /* Al menos 60% de la pantalla */
-  padding: 80px 20px; /* Espaciado arriba/abajo */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centrado vertical */
-}
-
-.c1 {
-  padding-bottom: 80px;
-}
-.c3 {
-  margin-top: 100px;
-}
-
-/* Estilo personalizado para el menú desplegable */
-/* Hover dropdown para pantallas grandes */
-@media (min-width: 992px) {
-  .navbar .dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0.5rem;
-  }
-}
-
-/* Mejora visual del dropdown */
+/* Dropdown común para ambos tamaños */
 .dropdown-menu {
   background-color: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(6px);
   border-radius: 1rem;
   border: none;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-light);
   padding: 0.5rem 0;
-  transition: all 0.3s ease-in-out;
+  transition: var(--transition-smooth);
 }
 
 .dropdown-item {
   padding: 0.7rem 1.5rem;
-  color: #0d0d0d;
+  color: var(--text-dark);
   font-weight: 500;
   transition: background 0.3s, color 0.3s;
   border-radius: 0.5rem;
 }
 
 .dropdown-item:hover {
-  background-color: #0d6efd;
+  background-color: var(--primary-color);
   color: white;
-}
-@media (min-width: 992px) {
-  .navbar .dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0; /* Esto es importante para que no haya espacio */
-  }
 }
 
 .dropdown-menu .bi {
-  color: #0d0d0d !important;
+  color: var(--text-dark) !important;
+}
+
+/* ========================================================================= */
+/*  ESTILOS PARA ESCRITORIO (pantallas grandes)                             */
+/* ========================================================================= */
+
+@media (min-width: 992px) {
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-link {
+    color: white !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem !important;
+  }
+
+  .nav-link:hover {
+    color: var(--primary-color) !important;
+  }
+
+  .navbar-scrolled .nav-link {
+    color: #333 !important;
+  }
+
+  .navbar-scrolled .nav-link:hover {
+    color: var(--primary-color) !important;
+  }
+
+  /* Dropdown específico para escritorio */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 200px;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    box-shadow: var(--shadow-strong);
+    margin-top: 0.5rem;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  }
+
+  .dropdown-item {
+    padding: 0.5rem 1rem;
+    color: #333;
+    transition: background-color 0.2s ease;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: var(--primary-color);
+  }
+}
+
+/* ========================================================================= */
+/*  ESTILOS PARA MÓVIL (pantallas pequeñas)                                 */
+/* ========================================================================= */
+
+@media (max-width: 991.98px) {
+  /* Botón hamburguesa */
+  .hamburger-custom {
+    border: none !important;
+    background: none !important;
+    padding: 4px 8px;
+    margin: 0;
+  }
+
+  .hamburger-custom:focus {
+    box-shadow: none !important;
+  }
+
+  /* Ícono hamburguesa personalizado */
+  .hamburger-icon {
+    background-image: none !important;
+    width: 24px;
+    height: 18px;
+    position: relative;
+    transform: none !important;
+  }
+
+  .hamburger-icon,
+  .hamburger-icon::before,
+  .hamburger-icon::after {
+    display: block;
+    background-color: white;
+    height: 2px;
+    width: 24px;
+    transition: var(--transition-smooth);
+  }
+
+  .hamburger-icon::before,
+  .hamburger-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .hamburger-icon::before {
+    top: -6px;
+  }
+
+  .hamburger-icon::after {
+    bottom: -6px;
+  }
+
+  /* Estado scrolled - hamburguesa gris */
+  .hamburger-scrolled,
+  .hamburger-scrolled::before,
+  .hamburger-scrolled::after {
+    background-color: rgba(0, 0, 0, 0.55) !important;
+  }
+
+  /* Menú desplegable móvil */
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto !important;
+    width: 280px;
+    background: white;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: var(--shadow-strong);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: none;
+    z-index: 1000;
+    padding: 1rem;
+    margin-top: 1px;
+    transition: var(--transition-smooth);
+  }
+
+  /* Flecha del menú */
+  .navbar-collapse::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid white;
+    z-index: 1001;
+  }
+
+  /* Enlaces del menú móvil */
+  .navbar-nav {
+    padding: 0;
+    flex-direction: column;
+  }
+
+  .navbar-nav .nav-link {
+    color: #333 !important;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: var(--primary-color) !important;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    margin: 0 -0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .navbar-nav .nav-link.active {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+  }
+
+  /* Dropdown móvil */
+  .dropdown-menu {
+    position: static !important;
+    float: none !important;
+    width: 100% !important;
+    margin-top: 0;
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: block;
+  }
+
+  .dropdown-item {
+    color: #666 !important;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .dropdown-item:hover {
+    background-color: #e9ecef;
+    color: var(--primary-color) !important;
+  }
+
+  /* Animaciones */
+  .navbar-collapse.show {
+    animation: slideDownFade 0.3s ease-out;
+  }
+
+  @keyframes slideDownFade {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Pantallas muy pequeñas */
+  @media (max-width: 480px) {
+    .navbar-collapse {
+      width: calc(100vw - 40px);
+      right: 20px;
+    }
+
+    .navbar-collapse::before {
+      right: 40px;
+    }
+  }
+}
+
+/* ========================================================================= */
+/*  FORMULARIO DE CONTACTO                                                   */
+/* ========================================================================= */
+
+#formulario-contacto {
+  min-height: 60vh;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.c1 {
+  padding-bottom: 80px;
+}
+
+.c3 {
+  margin-top: 100px;
 }
